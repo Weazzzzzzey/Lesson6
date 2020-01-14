@@ -11,7 +11,8 @@ namespace KlasesDarbai
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.VardoG("Mr. Dee",25);
+            //p.VardoG("Mr. Dee",25);
+            Console.WriteLine(p.Sharpas("feef"));
             Console.ReadLine();
         }
 
@@ -22,6 +23,18 @@ namespace KlasesDarbai
                 Console.WriteLine("{0}", vardas);
             }
 
+        }
+
+        public string Sharpas(string eilute)
+        {
+            int SimbolK = eilute.Length;
+            string EiluteG = "";
+            
+            for (int i = 0; i < SimbolK; i++)
+            {
+                EiluteG = EiluteG + "#";
+            }
+            return EiluteG;
         }
 
     }
