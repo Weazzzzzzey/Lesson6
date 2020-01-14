@@ -10,6 +10,19 @@ namespace KlasesDarbai
     {
         static void Main(string[] args)
         {
+            Program p = new Program();
+            p.VardoG("Mr. Dee",25);
+            Console.ReadLine();
         }
+
+        public void VardoG(string vardas,int kiekis)
+        {
+            for (int i = 0; i < kiekis; i++)
+            {
+                Console.WriteLine("{0}", vardas);
+            }
+
+        }
+
     }
 }
