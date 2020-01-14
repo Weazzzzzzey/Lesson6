@@ -12,7 +12,7 @@ namespace KlasesDarbai
         {
             Program p = new Program();
             //p.VardoG("Mr. Dee",25);
-            Console.WriteLine(p.Sharpas("feef"));
+            Console.WriteLine(p.KMI(55,1.70));
             Console.ReadLine();
         }
 
@@ -35,6 +35,14 @@ namespace KlasesDarbai
                 EiluteG = EiluteG + "#";
             }
             return EiluteG;
+        }
+
+        public double KMI(double mase, double ugis)
+        {
+
+            double kmi = mase / Math.Pow(ugis,2);
+            return Math.Round(kmi,2);
+
         }
 
     }
