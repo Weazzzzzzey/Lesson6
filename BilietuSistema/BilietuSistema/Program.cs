@@ -28,41 +28,36 @@ namespace BilietuSistema
         }
         public void BilietuPirkimas(int tipas, int kiekis)
         {
-            bool pateko = true;
             Console.WriteLine("{0} {1}", tipas, kiekis );
             //Bilietai uz 10e
             if (tipas == 1 && kiekis <= Bilietai10)
             {
                 Bilietai10 = Bilietai10 - kiekis;
-                pateko = false;
             }
-            else if(kiekis < Bilietai10 && pateko != false)
+            else
             {
-                Console.WriteLine("Bilietu kiekis nepakankamas");
+                Console.WriteLine("1 Bilietu kiekis nepakankamas");
             }
             
             //Bilietai uz 20e
             if (tipas == 2 && kiekis <= Bilietai20)
             {
                 Bilietai20 = Bilietai10 - kiekis;
-                pateko = false;
             }
-            else if (kiekis < Bilietai10 && pateko != false)
+            else
             {
-                Console.WriteLine("Bilietu kiekis nepakankamas");
+                Console.WriteLine("2 Bilietu kiekis nepakankamas");
             }
             
             //Bilietai uz 30e
             if (tipas == 3 && kiekis <= Bilietai30)
             {
                 Bilietai30 = Bilietai10 - kiekis;
-                pateko = false;
             }
-            else if (kiekis < Bilietai10 && pateko != false)
+            else
             {
-                Console.WriteLine("Bilietu kiekis nepakankamas");
+                Console.WriteLine("3 Bilietu kiekis nepakankamas");
             }
-            pateko = true;
             Console.WriteLine();
         }
 
