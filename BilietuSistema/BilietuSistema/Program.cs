@@ -11,6 +11,10 @@ namespace BilietuSistema
         int Bilietai10 = 100;
         int Bilietai20 = 100;
         int Bilietai30 = 100;
+        const string Nepakankamumas = "Kasoje nera tiek bilietu siuo metu.";
+        const string BilietaiIpilti = "Bilietai prideti sekmingai.";
+        const string GerosKeliones = "Malonu, kad renkates musu kompanija. Geros keliones!";
+        const string PapildimoAprasas = "Noredami panaikinti bilietus pries ivedama skaiciu pridekite (-) zenkla.";
 
         public void Meniu()
         {
@@ -26,40 +30,93 @@ namespace BilietuSistema
             Console.WriteLine("Bilietai uz 30e spauskite - 3");
             Console.WriteLine("Ir iveskite ju kieki");
         }
-        public void BilietuPirkimas(int tipas, int kiekis)
+        public void Nukpreipimas(int tipas, int kiekis, int pasirinkimas)
         {
-            Console.WriteLine("{0} {1}", tipas, kiekis );
-            //Bilietai uz 10e
-            if (tipas == 1 && kiekis <= Bilietai10)
+
+            if (pasirinkimas == 1)
+            {
+                if (tipas == 1)
+                    pirktiBilietus10(kiekis);
+                if (tipas == 2)
+                    pirktiBilietus20(kiekis);
+                if (tipas == 3)
+                    pirktiBilietus30(kiekis);
+            }
+            else if (pasirinkimas == 2)
+            {
+                if (tipas == 1)
+                    BilietuPildymas10(kiekis);
+                if (tipas == 2)
+                    BilietuPildymas20(kiekis);
+                if (tipas == 3)
+                    BilietuPildymas30(kiekis);
+            }
+        }
+
+        public void BilietuPildymas10(int kiekis)
+        {
+            Bilietai10 = Bilietai10 + kiekis;
+            Console.WriteLine(BilietaiIpilti);
+        }
+        public void BilietuPildymas20(int kiekis)
+        {
+            Bilietai20 = Bilietai20 + kiekis;
+            Console.WriteLine(BilietaiIpilti);
+        }
+        public void BilietuPildymas30(int kiekis)
+        {
+            Bilietai30 = Bilietai30 + kiekis;
+            Console.WriteLine(BilietaiIpilti);
+        }
+
+        public void pirktiBilietus10(int kiekis)
+        {
+            if (Bilietai10 >= kiekis)
             {
                 Bilietai10 = Bilietai10 - kiekis;
+                Ataskaita();
             }
-            else
-            {
-                Console.WriteLine("1 Bilietu kiekis nepakankamas");
-            }
-            
-            //Bilietai uz 20e
-            if (tipas == 2 && kiekis <= Bilietai20)
-            {
-                Bilietai20 = Bilietai10 - kiekis;
-            }
-            else
-            {
-                Console.WriteLine("2 Bilietu kiekis nepakankamas");
-            }
-            
-            //Bilietai uz 30e
-            if (tipas == 3 && kiekis <= Bilietai30)
-            {
-                Bilietai30 = Bilietai10 - kiekis;
-            }
-            else
-            {
-                Console.WriteLine("3 Bilietu kiekis nepakankamas");
-            }
-            Console.WriteLine();
+
+            else Console.WriteLine(Nepakankamumas);
         }
+
+        public void pirktiBilietus20(int kiekis)
+        {
+            if (Bilietai20 >= kiekis)
+            {
+                Bilietai20 = Bilietai20 - kiekis;
+                Ataskaita();
+            }
+
+            else Console.WriteLine(Nepakankamumas);
+        }
+
+        public void pirktiBilietus30(int kiekis)
+        {
+            if (Bilietai30 >= kiekis)
+            {
+                Bilietai30 = Bilietai30 - kiekis;
+                Ataskaita();
+            }
+
+
+            else Console.WriteLine(Nepakankamumas);
+        }
+
+        public void TurimasBilietuKiekis()
+        {
+            Console.WriteLine("Siuo metu bilietai kasoje:");
+            Console.WriteLine("Tipas - 10 {0}", getBilietai10());
+            Console.WriteLine("Tipas - 20 {0}", getBilietai20());
+            Console.WriteLine("Tipas - 30 {0}", getBilietai30());
+            Console.WriteLine("");
+        }
+
+        public void Ataskaita()
+        {
+            Console.WriteLine(GerosKeliones);
+        }
+
 
         public int getBilietai10()
         {
@@ -75,32 +132,43 @@ namespace BilietuSistema
             return Bilietai30;
         }
 
+        public void consolesClear()
+        {
+            Console.Clear();
+            TurimasBilietuKiekis();
+        }
+
+        public void PradziosPasirinkimas()
+        {
+            TurimasBilietuKiekis();
+            Meniu();
+
+            int pasirinkimas = Convert.ToInt32(Console.ReadLine());
+            if (pasirinkimas == 1)
+            {
+                consolesClear();
+                Tipai();
+                Nukpreipimas(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), pasirinkimas);
+            }
+            else if (pasirinkimas == 2)
+            {
+                consolesClear();
+                Tipai();
+                Console.WriteLine(PapildimoAprasas);
+                Nukpreipimas(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), pasirinkimas);
+            }
+        }
+
     }
-    
+
     class Program
     {
         static void Main(string[] args)
         {
             BilietuApskaita ba = new BilietuApskaita();
-            ba.Meniu();
-            int pasirinkimas = Convert.ToInt32(Console.ReadLine());
-            if (pasirinkimas == 1)
-            {
-                ba.Tipai();
-                ba.BilietuPirkimas(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()));
-                Console.WriteLine(ba.getBilietai10());
-                Console.WriteLine(ba.getBilietai20());
-                Console.WriteLine(ba.getBilietai30());
-            }
-            else if (pasirinkimas == 2)
-            {
-                ba.Tipai();
-
-            }
-
-
+            ba.PradziosPasirinkimas();
             Console.ReadLine();
-        
         }
+
     }
 }
