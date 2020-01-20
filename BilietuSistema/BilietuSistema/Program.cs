@@ -16,13 +16,13 @@ namespace BilietuSistema
         const string GerosKeliones = "Malonu, kad renkates musu kompanija. Geros keliones!";
         const string PapildimoAprasas = "Noredami panaikinti bilietus pries ivedama skaiciu pridekite (-) zenkla.";
 
-        public void Meniu()
+        public void ParodytiMeniu()
         {
             Console.WriteLine("Pirkti Bilietus spauskite - 1");
             Console.WriteLine("Kurti Bilietus spauskite - 2");
         }
 
-        public void Tipai()
+        public void RodytiTipus()
         {
             Console.WriteLine("Pasirikite bilietu Tipa:");
             Console.WriteLine("Bilietai uz 10e spauskite - 1");
@@ -30,7 +30,7 @@ namespace BilietuSistema
             Console.WriteLine("Bilietai uz 30e spauskite - 3");
             Console.WriteLine("Ir iveskite ju kieki");
         }
-        public void Nukpreipimas(int tipas, int kiekis, int pasirinkimas)
+        public void OperacijosParinkimas(int tipas, int kiekis, int pasirinkimas)
         {
 
             if (pasirinkimas == 1)
@@ -50,6 +50,25 @@ namespace BilietuSistema
                     BilietuPildymas20(kiekis);
                 if (tipas == 3)
                     BilietuPildymas30(kiekis);
+            }
+
+            UZbaigti();
+
+        }
+
+        public void UZbaigti()
+        {
+            Console.WriteLine("Pirkti dar bilietu? spauskite - 1");
+            Console.WriteLine("Baigti? Spauskite - 2");
+            int pasirinkimas = Convert.ToInt32(Console.ReadLine());
+
+            if (pasirinkimas == 1)
+            {
+                PradziosPasirinkimas();
+            }
+            else if(pasirinkimas == 2)
+            {
+                Console.WriteLine("Darbas baigtas");
             }
         }
 
@@ -103,7 +122,7 @@ namespace BilietuSistema
             else Console.WriteLine(Nepakankamumas);
         }
 
-        public void TurimasBilietuKiekis()
+        public void ParodytiTurimaBilietuKieki()
         {
             Console.WriteLine("Siuo metu bilietai kasoje:");
             Console.WriteLine("Tipas - 10 {0}", getBilietai10());
@@ -132,30 +151,30 @@ namespace BilietuSistema
             return Bilietai30;
         }
 
-        public void consolesClear()
+        public void ConsoleClear()
         {
             Console.Clear();
-            TurimasBilietuKiekis();
+            ParodytiTurimaBilietuKieki();
         }
 
         public void PradziosPasirinkimas()
         {
-            TurimasBilietuKiekis();
-            Meniu();
+            ParodytiTurimaBilietuKieki();
+            ParodytiMeniu();
 
             int pasirinkimas = Convert.ToInt32(Console.ReadLine());
             if (pasirinkimas == 1)
             {
-                consolesClear();
-                Tipai();
-                Nukpreipimas(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), pasirinkimas);
+                ConsoleClear();
+                RodytiTipus();
+                OperacijosParinkimas(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), pasirinkimas);
             }
             else if (pasirinkimas == 2)
             {
-                consolesClear();
-                Tipai();
+                ConsoleClear();
+                RodytiTipus();
                 Console.WriteLine(PapildimoAprasas);
-                Nukpreipimas(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), pasirinkimas);
+                OperacijosParinkimas(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), pasirinkimas);
             }
         }
 
